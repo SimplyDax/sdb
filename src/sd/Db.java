@@ -45,13 +45,31 @@ public class Db extends PluginBase {
         if (exists) return true; // если есть, то тру
         else return false; // если нет, то фолс
     }
+
     public String getStringColumn(Player player, String column){
         if(!this.checkPlayer(player)) return "Загрузка..."; // в россии живём))
         String s = this.config.getString(player.getName().toLowerCase() + "." + column);
         if(s == null) return "Загрузка..."; // ачё)))))
         return s;
     }
+
+    public int getIntColumn(Player player, String column){
+        if(!this.checkPlayer(player)) return 0; // в россии живём))
+        int s = Integer.parseInt(this.config.getString(player.getName().toLowerCase() + "." + column));
+        return s;
+    }
+
     public boolean set(Player player, String column, String value){
+        try {
+            this.config.set(player.getName().toLowerCase() + "." + column, value);
+            this.config.save();
+            this.config.reload();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    public boolean setInt(Player player, String column, int value){
         try {
             this.config.set(player.getName().toLowerCase() + "." + column, value);
             this.config.save();
