@@ -51,4 +51,14 @@ public class Db extends PluginBase {
         if(s == null) return "Загрузка..."; // ачё)))))
         return s;
     }
+    public boolean set(Player player, String column, String value){
+        try {
+            this.config.set(player.getName().toLowerCase() + "." + column, value);
+            this.config.save();
+            this.config.reload();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
 }
