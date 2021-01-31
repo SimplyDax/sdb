@@ -1,0 +1,5 @@
+name: SDB
+main: sd.Db
+api: 1.0.9
+author: SimpleDax
+version: 1.0.0
